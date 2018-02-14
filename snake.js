@@ -109,16 +109,16 @@ function moveSnake(){
 			default:
 			break
 		}
-		if(snake[i].x < -SNAKE_SIZE.width){
+		if(snake[i].x < 0){
 			snake[i].x = canvas.width
 		}
-		if(snake[i].x > canvas.width + SNAKE_SIZE.width){
+		if(snake[i].x > canvas.width ){
 			snake[i].x = 0
 		}
-		if(snake[i].y < -SNAKE_SIZE.height){
+		if(snake[i].y < 0){
 			snake[i].y = canvas.height
 		}
-		if(snake[i].y > canvas.height + SNAKE_SIZE.height){
+		if(snake[i].y > canvas.height){ 
 			snake[i].y = 0
 		}
 	}
@@ -151,7 +151,7 @@ function start(){
 }
 
 function spawnFood(){
-	var foodT = { x: Math.floor(Math.random()*(canvas.width/SNAKE_SIZE.width))*SNAKE_SIZE.width, y: Math.floor(Math.random()*(canvas.height/SNAKE_SIZE.height))*SNAKE_SIZE.height, w: SNAKE_SIZE.width, h: SNAKE_SIZE.height }
+	var foodT = { x: ((((canvas.width/SNAKE_SIZE.width)-4)*Math.random())+2) * SNAKE_SIZE.width, y: ((((canvas.height/SNAKE_SIZE.height)-4)*Math.random())+2) * SNAKE_SIZE.height, w: SNAKE_SIZE.width, h: SNAKE_SIZE.height }
 	if(intersectingSnake(foodT, snake.length, 0)){
 		incrementSnake()
 		spawnFood()
