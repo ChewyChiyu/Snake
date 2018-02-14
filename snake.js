@@ -4,6 +4,8 @@ window.onload = function(){ //on load guard
 const canvas = document.getElementById("window")
 const context= canvas.getContext("2d")
 const pauseButton = document.getElementById("pause")
+const scoreBox = document.getElementById("score")
+
 const SNAKE_SIZE = { width: 30, height: 30 }
 
 const spawnPoint = { x: canvas.width/2, y: canvas.height/2 }
@@ -17,6 +19,7 @@ var isPaused = false
 var snake
 var gameLoop
 var food
+var score 
 
 pauseButton.onclick = function(){
 	isPaused = !isPaused
@@ -37,13 +40,14 @@ function checkForHit(){
 	if(intersectingSnake(food,1,0)){
 		incrementSnake()
 		spawnFood()
+		scoreBox.innerHTML = "Score " + ++score
 	}
-
 	//head on body
 	if(intersectingSnake({x: snake[0].x, y: snake[0].y, w: SNAKE_SIZE.width, h: SNAKE_SIZE.height}, snake.length, 1)){
 		decreaseSnake(snake.length-2)
+		score = 0
+		scoreBox.innerHTML = "Score " + score
 	}
-
 }
 
 
@@ -59,34 +63,34 @@ function updateDirections(){
 
 window.addEventListener("keydown", function (event) {
 	if(isPaused){ return }
-	switch(event.key){
-		case "a":
-		if(snake[0].direction != direction.east){
-			snake[0].direction = direction.west 
+		switch(event.key){
+			case "a":
+			if(snake[0].direction != direction.east){
+				snake[0].direction = direction.west 
+			}
+			break
+			case "d":
+			if(snake[0].direction != direction.west){
+				snake[0].direction = direction.east
+			}
+			break
+			case "s":
+			if(snake[0].direction != direction.north){
+				snake[0].direction = direction.south
+			}
+			break
+			case "w":
+			if(snake[0].direction != direction.south){
+				snake[0].direction = direction.north
+			}
+			break
+			default:
+			break
 		}
-		break
-		case "d":
-		if(snake[0].direction != direction.west){
-			snake[0].direction = direction.east
-		}
-		break
-		case "s":
-		if(snake[0].direction != direction.north){
-			snake[0].direction = direction.south
-		}
-		break
-		case "w":
-		if(snake[0].direction != direction.south){
-			snake[0].direction = direction.north
-		}
-		break
-		default:
-		break
-	}
 
 
-	event.preventDefault();
-}, true);
+		event.preventDefault();
+	}, true);
 
 
 
@@ -139,6 +143,7 @@ function draw(){
 function start(){
 
 	snake = []
+	score = 0
 
 	//start off the snake 4 long i guess
 	for(var i = 0; i < 6; i++){
@@ -174,7 +179,7 @@ function intersectingSnake(args, length, start){
 
 function decreaseSnake(length){
 	if(snake.length < 2){ return }
-	snake.splice(snake.length-length,length)
+		snake.splice(snake.length-length,length)
 }
 
 
