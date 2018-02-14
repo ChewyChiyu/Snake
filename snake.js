@@ -192,7 +192,7 @@ function incrementSnake(){
 		switch(snake[snake.length-1].direction){
 			case direction.north:
 			snake.push({x: snake[snake.length-1].x, y: snake[snake.length-1].y + SNAKE_SIZE.height, direction: direction.north})
-			break
+			break 
 			case direction.east:
 			snake.push({x: snake[snake.length-1].x - SNAKE_SIZE.width, y: snake[snake.length-1].y, direction: direction.east})
 			break
