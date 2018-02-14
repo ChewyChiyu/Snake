@@ -109,16 +109,16 @@ function moveSnake(){
 			default:
 			break
 		}
-		if(snake[i].x < 0){
+		if(snake[i].x < -SNAKE_SIZE.width){
 			snake[i].x = canvas.width
 		}
-		if(snake[i].x > canvas.width){
+		if(snake[i].x > canvas.width + SNAKE_SIZE.width){
 			snake[i].x = 0
 		}
-		if(snake[i].y < 0){
+		if(snake[i].y < -SNAKE_SIZE.height){
 			snake[i].y = canvas.height
 		}
-		if(snake[i].y > canvas.height){
+		if(snake[i].y > canvas.height + SNAKE_SIZE.height){
 			snake[i].y = 0
 		}
 	}
